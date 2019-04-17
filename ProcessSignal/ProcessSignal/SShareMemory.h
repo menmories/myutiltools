@@ -5,23 +5,28 @@
 #include <Windows.h>
 #include <atlbase.h>
 #include <atlstr.h>
-class SShareMemory
+namespace SCarabLib
 {
-public:
-	SShareMemory(const CString& strFileMappingName);
-	~SShareMemory();
+	class SShareMemory
+	{
+	public:
+		SShareMemory(const CString& strFileMappingName);
+		~SShareMemory();
 
-	bool Create();
+		bool Create();
 
-	void Write(char* buf, int len);
+		void Write(char* buf, int len);
 
-	void Read(char* buf, int len);
+		void Read(char* buf, int len);
 
-	void Destroy();
-private:
-	HANDLE m_hFileMapping;
-	LPVOID m_lpSharMemory;
-	CString m_strMappingFileName;
-};
+		void Destroy();
+	private:
+		HANDLE m_hFileMapping;
+		LPVOID m_lpSharMemory;
+		CString m_strMappingFileName;
+	};
+}	//namespace SCarabLib
+
+
 
 #endif

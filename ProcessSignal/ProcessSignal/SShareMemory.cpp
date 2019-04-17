@@ -2,17 +2,17 @@
 
 
 
-SShareMemory::SShareMemory(const CString& strFileMappingName)
+SCarabLib::SShareMemory::SShareMemory(const CString& strFileMappingName)
 	: m_strMappingFileName(strFileMappingName)
 {
 }
 
 
-SShareMemory::~SShareMemory()
+SCarabLib::SShareMemory::~SShareMemory()
 {
 }
 
-bool SShareMemory::Create()
+bool SCarabLib::SShareMemory::Create()
 {
 	m_hFileMapping = OpenFileMapping(FILE_MAP_ALL_ACCESS, FALSE, m_strMappingFileName);
 	if (!m_hFileMapping)
@@ -31,17 +31,17 @@ bool SShareMemory::Create()
 	return true;
 }
 
-void SShareMemory::Write(char * buf, int len)
+void SCarabLib::SShareMemory::Write(char * buf, int len)
 {
 	memcpy(m_lpSharMemory, buf, len);
 }
 
-void SShareMemory::Read(char * buf, int len)
+void SCarabLib::SShareMemory::Read(char * buf, int len)
 {
 	memcpy(buf, m_lpSharMemory, len);
 }
 
-void SShareMemory::Destroy()
+void SCarabLib::SShareMemory::Destroy()
 {
 	UnmapViewOfFile(m_lpSharMemory);
 	::CloseHandle(m_hFileMapping);
